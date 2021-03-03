@@ -75,6 +75,6 @@ Prawn::Document.class_eval do
         end
       end
     end
-    formatted_text(parts, text_options)
+    formatted_text_box(parts, text_options)
   end
 end
