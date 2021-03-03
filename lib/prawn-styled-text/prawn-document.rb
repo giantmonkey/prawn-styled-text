@@ -3,10 +3,10 @@
 require 'prawn'
 
 Prawn::Document.class_eval do
-  def styled_text(data)
+  def styled_text(data, init_text_options = {}, init_extra_options = { margin_left: 0 })
     parts = []
-    text_options = {}
-    extra_options = { margin_left: 0 }
+    text_options = init_text_options.dup
+    extra_options = init_extra_options.dup
     oga = Oga.parse_html data
     PrawnStyledText::traverse oga.children do |type, text, data|
       context =
@@ -31,8 +31,8 @@ Prawn::Document.class_eval do
           end
         end
         parts = []
-        text_options = {}
-        extra_options = { margin_left: 0 }
+        text_options = init_text_options.dup
+        extra_options = init_extra_options.dup
       end
       options = context[:options]
       if type == :text_node
